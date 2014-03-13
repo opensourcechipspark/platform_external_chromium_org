@@ -9,6 +9,8 @@ import android.widget.OverScroller;
 
 import com.google.common.annotations.VisibleForTesting;
 
+import android.util.Log;
+
 /**
  * Takes care of syncing the scroll offset between the Android View system and the
  * InProcessViewRenderer.
@@ -113,6 +115,9 @@ public class AwScrollOffsetManager {
     //---------------------------------------------------------------------------------------------
     // Called when the scroll range changes. This needs to be the size of the on-screen content.
     public void setMaxScrollOffset(int width, int height) {
+        // add by cmc for cts fail
+        if (width <= 0)
+			width = 1;
         mMaxHorizontalScrollOffset = width;
         mMaxVerticalScrollOffset = height;
     }

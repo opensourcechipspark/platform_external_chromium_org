@@ -291,7 +291,9 @@ void WebMediaPlayerAndroid::play() {
 #endif
 
   TryCreateStreamTextureProxyIfNeeded();
-  if (hasVideo() && needs_establish_peer_)
+  LOG(WARNING) << "hasVideo: " << hasVideo() << ", " << 
+  	"needs_establish_peer_: " << needs_establish_peer_;
+  if (hasVideo() /*&& needs_establish_peer_*/)
     EstablishSurfaceTexturePeer();
 
   if (paused())

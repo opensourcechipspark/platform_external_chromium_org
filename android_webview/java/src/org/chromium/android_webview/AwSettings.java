@@ -83,7 +83,7 @@ public class AwSettings {
     private boolean mLoadWithOverviewMode = false;
     private boolean mMediaPlaybackRequiresUserGesture = true;
     private String mDefaultVideoPosterURL;
-    private float mInitialPageScalePercent = 0;
+    private float mInitialPageScalePercent = 100;
     private boolean mSpatialNavigationEnabled;  // Default depends on device features.
 
     private final boolean mSupportLegacyQuirks;
