@@ -1,4 +1,4 @@
-// Copyright (c) 2013 The Chromium Authors. All rights reserved.
+// Copyright 2013 The Chromium Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
@@ -28,7 +28,7 @@ public class RenderCoordinates {
     // Cached page scale factor from native.
     private float mPageScaleFactor = 1.0f;
     private float mMinPageScaleFactor = 1.0f;
-    private float mMaxPageScaleFactor = 1.0f;
+    private float mMaxPageScaleFactor = 2.0f;
 
     // Cached device density.
     private float mDeviceScaleFactor;
@@ -269,6 +269,14 @@ public class RenderCoordinates {
      * @return True if the page doesn't allow zoom-in/zoom-out.
      */
     public boolean hasFixedPageScale() { return mMinPageScaleFactor == mMaxPageScaleFactor; }
+
+    /**
+     * @return True if the page has a width=device-width or narrower viewport.
+     */
+    public boolean hasMobileViewport() {
+        float windowWidthDip = mPageScaleFactor * mLastFrameViewportWidthCss;
+        return mContentWidthCss <= windowWidthDip;
+    }
 
     /**
      * @return Maximum possible horizontal scroll in physical pixels.

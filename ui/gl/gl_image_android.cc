@@ -26,13 +26,17 @@ scoped_refptr<GLImage> GLImage::CreateGLImage(gfx::PluginWindowHandle window) {
 }
 
 scoped_refptr<GLImage> GLImage::CreateGLImageForGpuMemoryBuffer(
-    gfx::GpuMemoryBufferHandle buffer, gfx::Size size) {
-  TRACE_EVENT0("gpu", "GLImage::CreateGLImageForGpuMemoryBuffer");
+    gfx::GpuMemoryBufferHandle buffer,
+    gfx::Size size,
+    unsigned internalformat) {
+  TRACE_EVENT1("gpu", "GLImage::CreateGLImageForGpuMemoryBuffer", 
+  	"type", buffer.type);
   switch (GetGLImplementation()) {
     case kGLImplementationEGLGLES2:
       switch (buffer.type) {
         case SHARED_MEMORY_BUFFER: {
-          scoped_refptr<GLImageShm> image(new GLImageShm(size));
+          scoped_refptr<GLImageShm> image(
+              new GLImageShm(size, internalformat));
           if (!image->Initialize(buffer))
             return NULL;
 
